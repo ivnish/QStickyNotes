@@ -225,7 +225,11 @@ bool StickyNoteWidget::eventFilter(QObject *obj, QEvent *event) {
       QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
       if (mouseEvent->button() == Qt::LeftButton) {
         m_resizing = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         m_resizeStartPos = mouseEvent->globalPosition();
+#else
+        m_resizeStartPos = mouseEvent->globalPos();
+#endif
         m_resizeStartSize = size();
         return true;
       }
@@ -233,7 +237,11 @@ bool StickyNoteWidget::eventFilter(QObject *obj, QEvent *event) {
     if (event->type() == QEvent::MouseMove) {
       if (m_resizing) {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         QPointF delta = mouseEvent->globalPosition() - m_resizeStartPos;
+#else
+        QPointF delta = mouseEvent->globalPos() - m_resizeStartPos;
+#endif
         int newWidth = m_resizeStartSize.width() + delta.x();
         int newHeight = m_resizeStartSize.height() + delta.y();
         if (newWidth < 150) {
