@@ -67,8 +67,8 @@ install(DIRECTORY translations/
         DESTINATION share/QStickyNotes/translations
         FILES_MATCHING PATTERN "*.qm")
 
-set(CPACK_PACKAGE_NAME "QStickyNotes")
-set(CPACK_PACKAGE_VERSION "0.1")
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_CONTACT "ivnish.dev@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Lightweight sticky notes application")
 set(CPACK_DEBIAN_PACKAGE_DESCRIPTION
@@ -79,7 +79,7 @@ set(CPACK_DEBIAN_PACKAGE_SECTION "utils")
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/ivnish/QStickyNotes")
 set(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Andrei 'ivnish' Ivnitskii")
-set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt6gui6t64")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt${QT_VERSION_MAJOR}gui${QT_VERSION_MAJOR}t64")
 include(CPack)
 
 # Testing
