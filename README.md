@@ -116,7 +116,7 @@ After running `cpack`, a `.deb` file will be generated in the build directory, f
 ```
 qstickynotes-0.1-Linux.deb
 ```
-<br>
+
 ### Install
 
 ```bash
@@ -139,7 +139,6 @@ QStickyNotes supports translations using Qt's translation system.
 * Language is detected automatically based on system locale
 
 ---
-
 
 ## License
 
