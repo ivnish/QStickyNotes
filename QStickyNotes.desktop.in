@@ -2,6 +2,6 @@
 Type=Application
 Name=QStickyNotes
 Exec=QStickyNotes
-Icon=/usr/share/QStickyNotes/Icons/QStickyNotes.png
+Icon=@CMAKE_INSTALL_PREFIX@/share/QStickyNotes/Icons/QStickyNotes.png
 Terminal=false
 Categories=Utility;

@@ -40,14 +40,14 @@ void StickyNoteWidget::init() {
   m_lockButton = new QPushButton(this);
   m_settingsButton = new QPushButton(this);
 
-  QString addButtonIcon = "/usr/share/QStickyNotes/Icons/add.png";
+  QString addButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/add.png";
   m_addButton->setIcon(QIcon(addButtonIcon));
-  QString closeButtonIcon = "/usr/share/QStickyNotes/Icons/close.png";
+  QString closeButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/close.png";
   m_closeButton->setIcon(QIcon(closeButtonIcon));
   m_locked = false;
-  QString lockButtonIcon = "/usr/share/QStickyNotes/Icons/unlock.png";
+  QString lockButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/unlock.png";
   m_lockButton->setIcon(QIcon(lockButtonIcon));
-  QString settingsButtonIcon = "/usr/share/QStickyNotes/Icons/settings.png";
+  QString settingsButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/settings.png";
   m_settingsButton->setIcon(QIcon(settingsButtonIcon));
 
   m_addButton->setFlat(true);
@@ -110,7 +110,7 @@ void StickyNoteWidget::init() {
   m_resizer = new QLabel(this);
   m_resizer->setFixedSize(16, 16);
   m_resizer->setCursor(Qt::SizeFDiagCursor);
-  QString resizerIcon = "/usr/share/QStickyNotes/Icons/resizer.png";
+  QString resizerIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/resizer.png";
   m_resizer->setPixmap(QPixmap(resizerIcon));
   updateResizerPosition();
   m_resizer->installEventFilter(this);
@@ -143,11 +143,11 @@ void StickyNoteWidget::init() {
     m_locked = !m_locked;
     if (!m_locked) {
       m_textEdit->setReadOnly(false);
-      QString lockButtonIcon = "/usr/share/QStickyNotes/Icons/unlock.png";
+      QString lockButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/unlock.png";
       m_lockButton->setIcon(QIcon(lockButtonIcon));
     } else {
       m_textEdit->setReadOnly(true);
-      QString lockButtonIcon = "/usr/share/QStickyNotes/Icons/lock.png";
+      QString lockButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/lock.png";
       m_lockButton->setIcon(QIcon(lockButtonIcon));
     }
     saveToFile();
@@ -337,11 +337,11 @@ void StickyNoteWidget::loadFromJson(const QJsonObject &obj) {
   m_locked = obj["locked"].toBool(false);
   if (!m_locked) {
     m_textEdit->setReadOnly(false);
-    QString lockButtonIcon = "/usr/share/QStickyNotes/Icons/unlock.png";
+    QString lockButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/unlock.png";
     m_lockButton->setIcon(QIcon(lockButtonIcon));
   } else {
     m_textEdit->setReadOnly(true);
-    QString lockButtonIcon = "/usr/share/QStickyNotes/Icons/lock.png";
+    QString lockButtonIcon = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/lock.png";
     m_lockButton->setIcon(QIcon(lockButtonIcon));
   }
 

@@ -1,3 +1,4 @@
+#include "config.h"
 #include "settings.h"
 #include "traymanager.h"
 
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
 
   QTranslator *translator = new QTranslator(&a);
   QString baseName = "qstickynotes_" + QLocale::system().name();
-  QString path = "/usr/share/QStickyNotes/translations";
+  QString path = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/translations";
   if (translator->load(baseName, path)) {
     a.installTranslator(translator);
   }

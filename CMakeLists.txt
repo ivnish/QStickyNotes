@@ -55,12 +55,34 @@ add_custom_target(uninstall
     COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
 )
 
+# CMake config to program
+
+set(GENERATED_INCLUDE_DIR
+    ${CMAKE_CURRENT_BINARY_DIR}/generated
+)
+
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/config.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/config.h
+    @ONLY
+)
+
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/QStickyNotes.desktop.in
+    ${CMAKE_CURRENT_BINARY_DIR}/QStickyNotes.desktop
+    @ONLY
+)
+
+target_include_directories(QStickyNotes PRIVATE
+    ${GENERATED_INCLUDE_DIR}
+)
+
 # DEB package
 
 install(DIRECTORY Icons/
         DESTINATION share/QStickyNotes/Icons)
 
-install(FILES QStickyNotes.desktop
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QStickyNotes.desktop
         DESTINATION share/applications)
 
 install(DIRECTORY translations/
@@ -100,6 +122,10 @@ if(DEFINED CMAKE_BUILD_TYPE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_link_libraries(tests
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Test
+    )
+
+    target_include_directories(tests PRIVATE
+        ${GENERATED_INCLUDE_DIR}
     )
 
     add_test(NAME QStickyNotesTests COMMAND tests)

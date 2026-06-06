@@ -54,7 +54,7 @@ TrayManager::TrayManager(QObject *parent) : QObject(parent), trayIcon(nullptr), 
 
   // Create tray icon.
   trayIcon = new QSystemTrayIcon(this);
-  QString path = "/usr/share/QStickyNotes/Icons/QStickyNotes.png";
+  QString path = QString(APP_INSTALL_PREFIX) + "/share/QStickyNotes/Icons/QStickyNotes.png";
   if (QFile::exists(path)) {
     trayIcon->setIcon(QIcon(path));
   } else {
