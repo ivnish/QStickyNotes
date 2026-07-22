@@ -107,12 +107,23 @@ include(CPack)
 # Testing
 
 if(DEFINED CMAKE_BUILD_TYPE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/test_install)
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/config.h.in
+        ${CMAKE_CURRENT_BINARY_DIR}/generated/config.h
+        @ONLY
+    )
+
     enable_testing()
 
     add_executable(tests
         tests/main.cpp
         tests/test_traymanager.h
         tests/test_traymanager.cpp
+        tests/test_settingsdialog.h
+        tests/test_settingsdialog.cpp
+        tests/test_stickynote.h
+        tests/test_stickynote.cpp
         src/traymanager.cpp
         src/stickynotewidget.cpp
         src/settingsdialog.cpp
@@ -126,6 +137,14 @@ if(DEFINED CMAKE_BUILD_TYPE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 
     target_include_directories(tests PRIVATE
         ${GENERATED_INCLUDE_DIR}
+    )
+
+    add_custom_command(TARGET tests POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory
+            ${CMAKE_BINARY_DIR}/test_install/share/QStickyNotes/Icons
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/Icons
+            ${CMAKE_BINARY_DIR}/test_install/share/QStickyNotes/Icons
     )
 
     add_test(NAME QStickyNotesTests COMMAND tests)

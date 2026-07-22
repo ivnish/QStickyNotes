@@ -308,8 +308,6 @@ void StickyNoteWidget::saveToFile() {
   file.close();
 
   m_isDirty = false;
-
-  qWarning() << "Save note to file";
 }
 
 int StickyNoteWidget::calculateTextHeight() const {
